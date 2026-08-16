@@ -7,6 +7,37 @@ The version currently installed in your store is shown in the Theme Editor under
 
 ---
 
+## [1.1.0]
+
+### Added
+
+- A named theme style, **Kestrin**. The theme now ships a preset, so the original design can be
+  restored from the Theme Editor after settings have been changed. No design values changed —
+  the preset holds exactly the settings 1.0.0 shipped with.
+- An [FAQ](faq.md) covering the questions that come up most often after installing, including the
+  logo fallback, three-level menus and the mega menu, storefront filters, color swatches, the size
+  chart button and what happens to settings on update.
+- A **Custom code and tutorials** policy in [Support](support.md), setting out what happens when
+  the theme is edited, and why to duplicate before changing any file.
+
+### Changed
+
+- **Mobile layout options now read the same way in every section.** Sections that offered
+  "Grid / Scroll" now offer "Grid / Carousel", matching the wording already used elsewhere. If you
+  had chosen Scroll on a featured collection or category list, re-select **Carousel** to keep the
+  swipe behavior.
+
+### Fixed
+
+- Featured collections and category lists set to swipe on mobile were rendering as a grid instead.
+- The "View all" button under a category list no longer appears when no collections are selected.
+- Collection pages no longer reserve an empty filter sidebar before storefront filters have been
+  set up. Until you add filters, the page shows sorting on its own and gives the full width to the
+  product grid. Filtering scripts are now loaded only on pages that actually offer filtering or
+  sorting.
+
+---
+
 ## [1.0.0] — Initial release
 
 The first public release. Everything below is present in the theme as supplied; nothing here
