@@ -19,7 +19,7 @@ minutes and requires no code.
 ### Recommended before you start
 
 - At least a few **products**, each with one clear image. The theme shows placeholder
-  illustrations while your catalogue is empty, which makes it hard to judge the design.
+  illustrations while your catalog is empty, which makes it hard to judge the design.
 - At least two **collections**, so the collection and navigation sections have something to point at.
 - Your **logo** as a PNG or SVG with a transparent background.
 - Your store **policies** (refund, privacy, terms, shipping) saved under

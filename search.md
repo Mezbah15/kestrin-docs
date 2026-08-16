@@ -38,7 +38,7 @@ Products are always included when predictive search is on.
 ### Behavior
 
 - Suggestions appear after a short pause in typing, not on every keystroke.
-- Results are grouped by type, each group labelled.
+- Results are grouped by type, each group labeled.
 - **Arrow keys** move through suggestions, **Enter** opens the highlighted one, **Escape** closes
   the panel.
 - Screen readers are told how many results were found and which one is highlighted.

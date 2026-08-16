@@ -29,7 +29,7 @@ undersized one, because the theme can scale down but cannot invent detail.
 
 | Where | Recommended width | Ratio | Notes |
 | --- | --- | --- | --- |
-| **Product images** | 2000–2400px | Square, or consistent across the catalogue | The most important images in your store. |
+| **Product images** | 2000–2400px | Square, or consistent across the catalog | The most important images in your store. |
 | **Slideshow / hero** | 2400–3000px | Landscape (16:9 or wider) | Full width on large screens. |
 | **Slideshow / banner mobile image** | 1200–1500px | Portrait or square | Optional, but see [Mobile images](#mobile-images). |
 | **Collection images** | 1200–1600px | Matches the ratio you choose for cards | Used in collection banners and cards. |
@@ -60,7 +60,7 @@ optimizes and re-encodes uploads, but it cannot fix a 12MB source efficiently.
 
 This matters more than any single image being perfect.
 
-- **Same background** across the catalogue — white, off-white or one consistent color
+- **Same background** across the catalog — white, off-white or one consistent color
 - **Same framing** — the product occupying a similar proportion of the frame in every shot
 - **Same lighting** and color temperature
 - **Same orientation** — pick portrait or square and use it throughout

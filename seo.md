@@ -3,7 +3,7 @@
 This page separates what the theme does automatically from what you need to do yourself.
 
 **No theme can guarantee search rankings.** Rankings depend on your products, your content, your
-competitors and Google's judgement. What a theme can do is make sure nothing technical stands in
+competitors and Google's judgment. What a theme can do is make sure nothing technical stands in
 the way — and that is what this one does.
 
 ---

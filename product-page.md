@@ -122,7 +122,7 @@ A stepper for choosing how many to buy.
 | **Show volume pricing** | Shows quantity price tiers. |
 
 **About volume pricing.** These tiers come from Shopify and are shown only for **B2B customers
-whose company location has a catalogue with quantity breaks** — and Shopify charges those prices
+whose company location has a catalog with quantity breaks** — and Shopify charges those prices
 at checkout. There is deliberately no setting for typing your own "buy 3, save 10%" table,
 because the theme cannot verify that a typed discount will actually be applied. To run quantity
 discounts on a normal retail store, use **Discounts → automatic discount**, a Shopify Function,
@@ -345,7 +345,7 @@ on in **Theme settings → Badges**.
 
 ### Volume pricing does not appear
 
-It only appears for B2B customers whose company location has a catalogue with quantity breaks.
+It only appears for B2B customers whose company location has a catalog with quantity breaks.
 For a retail store it is expected to be absent — see the note under
 [Quantity selector](#quantity-selector-once).
 

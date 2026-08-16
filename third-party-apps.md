@@ -137,7 +137,7 @@ Every app you avoid is code you do not ship. Shopify covers more than many merch
 | A currency converter app | **Settings → Markets** |
 | A translation app | **Translate & Adapt** (free, Shopify) |
 | An analytics or pixel app | **Settings → Customer events** |
-| A wholesale pricing app | **B2B** on Shopify Plus, or company-location catalogues |
+| A wholesale pricing app | **B2B** on Shopify Plus, or company-location catalogs |
 | A "recently viewed" or recommendations app | The theme's **Product recommendations** section |
 | A trust badge app | The theme's **Multicolumn** section, or a footer Image block |
 | An FAQ app | The theme's **Collapsible content** section |

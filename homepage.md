@@ -446,7 +446,7 @@ A workable order for most stores:
 
 1. **Slideshow** or **Image banner** — one clear message and one call to action
 2. **Featured collection** — your best or newest products, immediately shoppable
-3. **Collections** — routes into the rest of the catalogue
+3. **Collections** — routes into the rest of the catalog
 4. **Image with text** — who you are, briefly
 5. **Multicolumn** — delivery, returns, guarantee
 6. **Testimonials** — proof

@@ -93,7 +93,7 @@ fault.
 
 | Layout | Desktop behavior |
 | --- | --- |
-| **Sidebar** | A permanent column of filters beside the grid. Best for large catalogues where filtering is the main way to browse. |
+| **Sidebar** | A permanent column of filters beside the grid. Best for large catalogs where filtering is the main way to browse. |
 | **Horizontal** | A row of filter dropdowns above the grid. Keeps the grid wide. |
 | **Drawer** | A **Filter** button that opens a panel. The most compact. |
 

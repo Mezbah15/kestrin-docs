@@ -111,7 +111,7 @@ belong in the footer, where shoppers look for them anyway.
 
 ## Worked examples
 
-These are starting points. Adapt the names to your catalogue.
+These are starting points. Adapt the names to your catalog.
 
 ### Fashion
 
