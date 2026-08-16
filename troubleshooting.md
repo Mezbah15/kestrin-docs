@@ -241,7 +241,7 @@ See [Responsive design](responsive-design.md).
    content**, with the right language selected.
 
 **A message looks broken, or shows literal braces**
-A placeholder like `{{ count }}` was altered or removed while editing theme content. Restore it
+A placeholder like {% raw %}`{{ count }}`{% endraw %} was altered or removed while editing theme content. Restore it
 exactly as it was.
 
 **My wording changes vanished after uploading a new theme version**

@@ -71,9 +71,11 @@ suspects when something breaks.
 Keep a plain text file recording, for each change: the file, roughly where, what it does, why,
 and the date. Comment the code itself too:
 
+{% raw %}
 ```liquid
 {% comment %} Custom: badge for pre-order products — added 2026-03-14 {% endcomment %}
 ```
+{% endraw %}
 
 **You will need this at your next theme update.** Custom code does not carry across, and
 undocumented changes are the main reason updates go badly. See [Updating](updating.md).

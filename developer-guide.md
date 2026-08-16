@@ -77,7 +77,7 @@ so a single setting rescales the whole type ramp.
 Shopify deduplicates repeated stylesheet tags, so a shared stylesheet requested by three sections
 is downloaded once.
 
-**Nothing uses `{% stylesheet %}` or `{% javascript %}`.** Those tags bundle every section's code
+**Nothing uses {% raw %}`{% stylesheet %}` or `{% javascript %}`{% endraw %}.** Those tags bundle every section's code
 into a single file served on every page, which defeats page-scoping.
 
 | File | Loaded by |
@@ -124,7 +124,7 @@ Editor replaces section markup — no `shopify:section:load` listeners needed.
 | `routes` | `root`, `cart`, `cartAdd`, `cartChange`, `cartUpdate`, `predictiveSearch`, `search` |
 | `settings` | `cartType`, `predictiveSearch` |
 | `strings` | Translated strings for client-side messages |
-| `t(key, replacements)` | Substitutes `{{ token }}` placeholders in a string |
+| `t(key, replacements)` | Substitutes {% raw %}`{{ token }}`{% endraw %} placeholders in a string |
 | `debounce(fn, wait)` | |
 | `fetchConfig(type)` | Standard fetch options for cart requests |
 | `getFocusable(container)` | |
@@ -187,12 +187,12 @@ refreshes the cart page, the drawer and the header bubble together.
 
 ## Liquid conventions
 
-- **Snippets carry a `{% comment %}` header** documenting their accepted parameters.
-- **Blocks rendered statically** via `{% content_for 'block' %}` carry a `{% doc %}` tag.
+- **Snippets carry a {% raw %}`{% comment %}`{% endraw %} header** documenting their accepted parameters.
+- **Blocks rendered statically** via {% raw %}`{% content_for 'block' %}` carry a `{% doc %}`{% endraw %} tag.
 - **Translation keys are spelled out literally**, not built with `append`, so Theme Check's
   `TranslationKeyExists` can verify them.
 - **Escape user and merchant content** with `| escape` on text output.
-- **Prefer `{%- liquid -%}` blocks** for multi-statement logic over chains of tags.
+- **Prefer {% raw %}`{%- liquid -%}`{% endraw %} blocks** for multi-statement logic over chains of tags.
 - **Gate optional UI on real data**, not on a setting alone — for example, volume pricing renders
   only when `variant.quantity_price_breaks.size > 0`.
 
@@ -274,7 +274,7 @@ sections reference (`scheme-1` light, `scheme-2` tinted, `scheme-3` dark).
 translation references.** Adding a storefront string means adding it to all five files.
 
 Client-side strings are passed through `#KestrinConfig` in `layout/theme.liquid`. Placeholders
-that must survive into JSON — like `{{ count }}` — are built with `assign` before the output tag,
+that must survive into JSON — like {% raw %}`{{ count }}`{% endraw %} — are built with `assign` before the output tag,
 because a brace-wrapped token cannot be written inline in a Liquid output tag.
 
 ---
@@ -283,7 +283,7 @@ because a brace-wrapped token cannot be written inline in a Liquid output tag.
 
 `sections/header-group.json` holds the announcement bar and header;
 `sections/footer-group.json` holds the footer. Both are rendered by `layout/theme.liquid` with
-`{% sections %}`.
+{% raw %}`{% sections %}`{% endraw %}.
 
 The cart drawer and back-to-top button are rendered directly from the layout rather than
 occupying a section group, because they are theme behavior rather than merchant-placed content.

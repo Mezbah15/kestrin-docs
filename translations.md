@@ -86,7 +86,7 @@ Notes:
 - **They are not carried across when you upload a new version of the theme.** Note any wording
   changes you make so you can reapply them after an update — see [Updating](updating.md).
 - Do the same in each published language, from the language switcher at the top of that screen.
-- Some entries contain placeholders in braces, like `{{ count }}` or `{{ title }}`. Keep them
+- Some entries contain placeholders in braces, like {% raw %}`{{ count }}` or `{{ title }}`{% endraw %}. Keep them
   exactly as they are — they are replaced with real values. Removing one breaks the message.
 
 ---
@@ -136,7 +136,7 @@ Both pickers work without JavaScript, so they remain usable in any browser.
 3. Look for the specific phrase under **Edit default theme content** in that language.
 
 **A translation shows the wrong thing, or a message looks broken.** A placeholder like
-`{{ count }}` was probably removed or altered during editing. Restore it exactly.
+{% raw %}`{{ count }}`{% endraw %} was probably removed or altered during editing. Restore it exactly.
 
 **My wording changes disappeared after an update.** Theme content edits belong to the theme they
 were made on and do not transfer to a newly uploaded version. Reapply them, and keep a note next
