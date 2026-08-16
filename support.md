@@ -15,8 +15,8 @@ days**.
   allow="fullscreen"
   src="https://form.jotform.com/262268776841066"
   frameborder="0"
-  style="min-width:100%;max-width:100%;height:539px;border:none;"
-  scrolling="no"
+  style="min-width:100%;max-width:100%;height:1600px;border:none;"
+  scrolling="auto"
 ></iframe>
 <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
 <script>window.jotformEmbedHandler("iframe[id='JotFormIFrame-262268776841066']", "https://form.jotform.com/")</script>
