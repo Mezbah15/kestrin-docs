@@ -50,8 +50,17 @@ Each line has a quantity stepper.
 
 - Changing a quantity updates the line total, the cart subtotal and the header count.
 - Any **minimum, maximum or increment** rule set on the variant is respected.
+- **Available stock is respected too.** The stepper will not climb past what you have, and it says
+  why when it stops — `Only 3 available.` Typing a larger number is corrected the same way. This
+  does not apply to variants set to **Continue selling when out of stock**, which have no ceiling.
 - Reducing a quantity to zero removes the line.
 - Rapid changes are batched, so holding the increase button does not fire a request per click.
+
+Stock can run out while a cart sits open, so Shopify has the final word rather than the page. If it
+refuses a change, the cart re-reads itself from Shopify before showing the message — so the number
+on screen is always the number in the cart, and the drawer, the cart page and the header count
+never disagree. A line already holding more than you have left is flagged as soon as the cart is
+opened.
 
 ---
 

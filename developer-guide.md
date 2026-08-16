@@ -10,7 +10,7 @@ everything a merchant needs is in the guides listed in the [README](README.md).
 | | |
 | --- | --- |
 | Theme name | Kestrin |
-| Version | 1.0.0 |
+| Version | 1.1.0 |
 | Author | MezTech |
 | Architecture | Shopify Online Store 2.0 |
 | Build step | None |
@@ -133,6 +133,7 @@ Editor replaces section markup — no `shopify:section:load` listeners needed.
 | `announce(message)` | Live-region announcement |
 | `sectionUrl(url, sections)` | Builds a Section Rendering API URL |
 | `isDesignMode()` | True inside the Theme Editor |
+| `variantPicker` | Option reading shared by the product page and card pickers — `read`, `containers`, `nodes`, `selected`, `match`, `valueAvailable`, `markAvailability` |
 
 ### Custom elements
 
@@ -142,7 +143,7 @@ announcement-bar     before-after         collapsible-on-mobile  header-nav
 back-to-top          cart-drawer          countdown-timer     localization-selector
 mobile-nav           overlay-element      pickup-availability predictive-search
 quantity-input       quick-add-button     share-button        site-header
-slideshow-carousel   deferred-media
+slideshow-carousel   deferred-media       card-variant-picker
 ```
 
 ### Script files
@@ -153,7 +154,7 @@ slideshow-carousel   deferred-media
 | `header.js` | Header, announcement bar, mobile nav, localization, footer accordions |
 | `cart.js` | Cart mutations and section swapping |
 | `product.js` | Variant selection, media gallery, product form |
-| `quick-add.js` | Add-to-cart from product cards |
+| `quick-add.js` | Variant selection and add-to-cart from product cards |
 | `facets.js` | Filtering and sorting |
 | `predictive-search.js` | Live search suggestions |
 | `slideshow.js` | Slideshow carousel |
@@ -193,6 +194,11 @@ refreshes the cart page, the drawer and the header bubble together.
   `TranslationKeyExists` can verify them.
 - **Escape user and merchant content** with `| escape` on text output.
 - **Prefer {% raw %}`{%- liquid -%}`{% endraw %} blocks** for multi-statement logic over chains of tags.
+- **One statement per line inside {% raw %}`{% liquid %}`{% endraw %}** — a newline ends the statement there, so a
+  `render` wrapped across lines is a broken tag followed by unparseable ones. Shopify rejects the
+  whole file on upload and the storefront blames whichever file *referenced* it, reporting
+  "Could not find asset". Standalone {% raw %}`{% render %}`{% endraw %} tags may span lines. Theme Check accepts the
+  wrapped form; `bin/check-liquid-tags.js` is what catches it.
 - **Gate optional UI on real data**, not on a setting alone — for example, volume pricing renders
   only when `variant.quantity_price_breaks.size > 0`.
 
@@ -212,7 +218,7 @@ Three areas deliberately constrain what the theme can display. Preserve these co
 
 **Quantity pricing.** Volume tiers come from `variant.quantity_price_breaks`; quantity
 minimum/maximum/increment rules come from `variant.quantity_rule`. Shopify populates both only
-for B2B customers whose company location has a catalogue with quantity breaks, and charges those
+for B2B customers whose company location has a catalog with quantity breaks, and charges those
 prices at checkout. The tier list is gated on `breaks.size > 0`.
 
 There is deliberately **no setting for merchant-typed discount tiers**. Liquid cannot read an
@@ -234,16 +240,26 @@ mode.
 
 ## Color swatch resolution
 
-`snippets/product-variant-picker.liquid` detects color options by name against the translatable
-`products.swatch.option_names` key, then resolves each value in order:
+`snippets/swatch-color.liquid` resolves a single option value to a swatch appearance. It is shared
+by the product page picker and the product card, so the two cannot disagree about which options
+can be drawn as swatches. It resolves in order:
 
 1. Shopify's swatch image
 2. Shopify's swatch color
 3. The value name read as a CSS color
 4. A built-in map of retail color words, with `multi` and `pattern` markers
 
-**An option only becomes swatches when every value resolves**, so SKU codes and values like
-"Black/White" keep the pill layout. Extend the fallback map rather than loosening this rule.
+It outputs one token — `image:<url>`, `color:<css>`, `multi`, `pattern`, or nothing. Callers
+capture the output and split on the first colon. A blank token means "not a color", which is what
+separates a real color option from one merely named like it.
+
+Both pickers detect color options by name against the translatable `products.swatch.option_names`
+key. **An option only becomes swatches when every value resolves**, so SKU codes and values like
+"Black/White" keep the pill layout. Extend the fallback map in `swatch-color.liquid` rather than
+loosening this rule.
+
+The card applies one extra rule: an option whose values all carry merchant-set swatch data renders
+as swatches whatever it is named. Anything else falls back to a compact select.
 
 ---
 
@@ -310,8 +326,17 @@ shopify theme check
 shopify theme push --unpublished
 ```
 
+```bash
+node bin/check-liquid-tags.js
+```
+
 `shopify theme dev` serves the theme locally with hot reload against real store data.
 `shopify theme check` must report **zero offenses** before any release.
+
+`bin/check-liquid-tags.js` needs no dependencies and covers the one mistake Theme Check passes
+silently: a statement wrapped across lines inside a {% raw %}`{% liquid %}`{% endraw %} tag. Shopify rejects such a file
+at upload, so it never reaches the theme and the storefront reports a missing asset against a
+different file. Run it before pushing.
 
 `.shopifyignore` excludes Markdown files (except `templates/*.md`), `.git`, `.github`,
 `node_modules` and the config files themselves from uploads — so this `docs/` directory is not
@@ -322,6 +347,7 @@ deployed to the store.
 ## Release checklist
 
 - [ ] `shopify theme check` — zero offenses
+- [ ] `node bin/check-liquid-tags.js` — no wrapped statements
 - [ ] Exact key parity across all five storefront locale files
 - [ ] Zero broken translation references
 - [ ] `theme_version` bumped in `config/settings_schema.json`

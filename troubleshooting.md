@@ -113,18 +113,19 @@ variant in Shopify admin and set its image there.
 **There is no variant picker**
 The product has only one variant. This is correct — there is nothing to choose.
 
-**Color options show as pills instead of swatches**
+**Color options show as pills or a dropdown instead of swatches**
 Either the option is not named as a color, **Picker style** is set to Dropdown, or at least one
 value could not be resolved to a color. The theme only uses swatches when *every* value in the
-option resolves — a value like "Black/White" or a SKU code keeps the whole option as pills. Set
-explicit swatch values in Shopify admin for every value.
+option resolves — a value like "Black/White" or a SKU code keeps the whole option as pills on the
+product page, and as a dropdown on product cards. Set explicit swatch values in Shopify admin for
+every value that is not an ordinary color name.
 
 **A sold-out variant can still be added to cart**
 Check **Continue selling when out of stock** on that variant. When it is on, Shopify permits the
 sale and the theme shows the item as backordered — which is correct.
 
 **Volume pricing does not appear**
-It only appears for B2B customers whose company location has a catalogue with quantity breaks.
+It only appears for B2B customers whose company location has a catalog with quantity breaks.
 On a retail store it is expected to be absent. See [Product page](product-page.md).
 
 ---

@@ -95,7 +95,7 @@ specific reason — smaller body text is harder to read on phones.
 | **Section spacing** | 80–130% | Scales the top and bottom padding of every section at once. Use this to tighten or loosen the whole page rhythm without editing each section. |
 | **Grid spacing** | 8–40px | The gap between items in product grids, collection grids and multi-column layouts. |
 
-**Recommended:** 1440px page width suits most catalogues. Go wider only if your product
+**Recommended:** 1440px page width suits most catalogs. Go wider only if your product
 photography is strong enough to hold a very wide grid.
 
 ---
@@ -145,7 +145,7 @@ results, recommendations and cart cross-sells. Some sections can override them i
 | **Show second image on hover** | On / off | Shows the product's second image when a shopper hovers over the card. Desktop only. Products with only one image are unaffected. |
 | **Show vendor** | On / off | Shows the product's Vendor field above the title. Off by default. |
 | **Show product rating** | On / off | Requires a product review app that writes to Shopify's standard review metafields. Nothing appears without one. |
-| **Show color swatches** | On / off | Shows the color options available for each product, using Shopify's native swatch values. Up to five, then a "+N" marker. |
+| **Show color swatches** | On / off | Shows a preview of each product's color options, up to five then a "+N" marker, linking to the product page. Applies when **Quick add** is None — with quick add on, cards show working option controls instead of a preview. |
 | **Quick add** | None, Standard, Bulk | See below. |
 
 ### Quick add
@@ -153,8 +153,8 @@ results, recommendations and cart cross-sells. Some sections can override them i
 | Option | Behavior |
 | --- | --- |
 | **None** | No add-to-cart control on cards. Shoppers open the product page. |
-| **Standard** | An **Add to cart** button that adds one unit. Products with more than one variant show **Choose options** instead, linking to the product page — the theme never guesses a variant. |
-| **Bulk** | As Standard, plus a quantity stepper on the card. Suited to wholesale and repeat-purchase catalogues. |
+| **Standard** | An **Add to cart** button that adds one unit. Products with options show those options on the card, so the shopper chooses a variant without leaving the page — the theme never guesses one. Only products with more than 50 variants fall back to **Choose options**. |
+| **Bulk** | As Standard, plus a quantity stepper on the card. Suited to wholesale and repeat-purchase catalogs. |
 
 Quick add never appears on sold-out products.
 

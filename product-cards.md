@@ -25,11 +25,12 @@ Reading top to bottom:
 | **Title** | Always. Links to the product page. |
 | **Rating** | When **Show product rating** is on and a review app has recorded reviews. |
 | **Price** | Always, including compare-at price and unit price where they exist. |
-| **Color swatches** | When **Show color swatches** is on and the product has an option with swatch values. |
+| **Options** | When the product has options. Selectable when **Quick add** is on, a preview otherwise. See below. |
 | **Quick add** | When **Quick add** is not None and the product is available. |
 
-The whole card is not a single link — the title is the link, and quick add controls are separate.
-This is deliberate: it keeps the card usable by keyboard and by screen readers.
+The whole card is not a single link — the title is the link, and the option and quick add controls
+are separate. This is deliberate: it keeps the card usable by keyboard and by screen readers, and
+it is what lets a shopper choose a color without being taken off the page.
 
 ---
 
@@ -114,18 +115,55 @@ overlaps the image awkwardly.
 
 ---
 
-## Color swatches
+## Options and color swatches
 
-When **Show color swatches** is on, the card shows the color options available for the product,
-using Shopify's native swatch values.
+What a product's options look like on the card depends on whether **Quick add** is on, because
+with quick add the options are how the shopper picks what gets added.
+
+### With quick add on
+
+The card shows working controls for **every** option the product has:
+
+- Options that read as colors become **swatches**.
+- Everything else — size, material, length — becomes a compact **dropdown**.
+
+Choosing an option selects that variant **on the card**, without opening the product page. The
+selected swatch is ringed, and the card updates to match: price and compare-at price, the image if
+that variant has its own, the Sale or Sold out badge, and the quantity limit on the Bulk stepper.
+**Add to cart** then adds exactly what is shown. Combinations you cannot buy are struck through
+rather than hidden, so the shopper can see a color exists before finding it is out of stock.
+
+The title and the image still open the product page as normal.
+
+### With quick add off
+
+There is nothing on the card to add to, so swatches are a preview instead of a control. When
+**Show color swatches** is on:
 
 - Up to **five** swatches are shown; beyond that a `+N` marker indicates how many more exist.
-- Clicking a swatch opens the product page with that variant already selected.
-- The theme uses the first option that has swatch values — normally your color option.
-- Nothing appears if the product has no swatch values set.
+- Clicking one opens the product page with that variant already selected.
+- The theme uses the first option that reads as a color.
 
-Set swatch values in Shopify admin (**Settings → Custom data → Products → Color swatch**, or in
-the variant editor) so the colors shown are your actual colors.
+### Which options become swatches
+
+An option becomes swatches when **every one of its values** resolves to a color. The theme tries,
+in order: your swatch image, your swatch color, the value name read as a color name, then a
+built-in list of retail color words — burgundy, taupe, oatmeal, rose gold and similar — including
+markers for `multi` and patterned values.
+
+Because every value has to resolve, an option holding SKU codes or values like `Black/White` keeps
+its readable labels instead of becoming a row of blank circles. If one color in an option comes out
+blank, that option falls back to a dropdown — set a swatch value on that one variant to fix it.
+
+Setting swatch values in Shopify admin (**Settings → Custom data → Products → Color swatch**, or
+in the variant editor) is still worth doing: it is the only way to get *your* exact colors and to
+use artwork for prints and patterns. You no longer have to, though — a product with ordinary color
+names now shows swatches without any setup.
+
+### Products with many variants
+
+Past **50 variants** a card stops trying to carry the options and shows **Choose options** instead,
+linking to the product page. This is the only case where that button now appears.
 
 ---
 
@@ -138,6 +176,10 @@ listed at all. On a sold-out card:
 - The card is visually de-emphasized
 - **Quick add is removed** — the theme never offers to add an unavailable product
 
+A product that is only *partly* sold out keeps its card working. Selecting a sold-out color shows
+the Sold out badge and disables **Add to cart** for that variant alone; choosing an available one
+brings the button straight back.
+
 To hide sold-out products entirely, use an automated collection condition, or a filter from the
 Search & Discovery app.
 
@@ -148,18 +190,20 @@ Search & Discovery app.
 | Option | Behavior |
 | --- | --- |
 | **None** | No control. The shopper opens the product page. |
-| **Standard** | **Add to cart** for single-variant products. Multi-variant products show **Choose options**, linking to the product page. |
+| **Standard** | **Add to cart**. Products with options show those options on the card first — see [Options and color swatches](#options-and-color-swatches). |
 | **Bulk** | As Standard, plus a quantity stepper on the card. |
 
 Notes:
 
-- **The theme never guesses a variant.** A product with options always sends the shopper to the
-  product page, so they choose deliberately.
+- **The theme never guesses a variant.** It adds whatever is selected on the card, and a product
+  with options shows those options rather than assuming one.
 - Adding from a card updates the cart count and, if you use the drawer, opens it — without
   leaving the page.
-- Any **minimum quantity** rule set on the variant is respected.
-- If an add fails (for example, stock ran out between page load and click), an error message
-  appears on the card rather than silently doing nothing.
+- **Quantity rules and stock are both respected.** The Bulk stepper will not climb past a
+  variant's maximum or past what you actually have, and it says why when it stops — `Only 3
+  available.` A shopper who types a larger number gets the same treatment.
+- If an add fails anyway — stock ran out between page load and click — Shopify's own message
+  appears on the card rather than the theme silently doing nothing.
 
 **Recommended:** **Standard** for most stores. **Bulk** for wholesale, consumables and anything
 bought in multiples. **None** if your products genuinely need to be read about before buying.
@@ -197,6 +241,7 @@ content.
 - **Consistent photography matters more than any setting here.** Same background, same framing,
   same crop. A fixed image ratio hides some inconsistency but cannot fix it.
 - **Give every product a second image** so the hover effect works everywhere.
-- **Set swatch values** rather than relying on color names.
-- **Four columns on desktop, two on mobile** suits most catalogues.
+- **Set swatch values** for your exact colors. Plain color names now work without them, but only
+  swatch values can match your actual dye lot or show a print.
+- **Four columns on desktop, two on mobile** suits most catalogs.
 - **Do not enable ratings until you have reviews**, or most cards will simply look incomplete.

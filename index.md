@@ -1,6 +1,6 @@
 # Kestrin — Theme Documentation
 
-**Version 1.0.0** · Built by MezTech
+**Version 1.1.0** · Built by MezTech
 
 Kestrin is a premium Online Store 2.0 theme for Shopify, built for fashion, electronics,
 beauty, home, lifestyle and general retail merchants.
@@ -65,6 +65,7 @@ guides is carried out through Shopify admin or the Theme Editor.
 
 ### Maintenance
 
+- [FAQ](faq.md) — quick answers to the questions asked most often
 - [Troubleshooting](troubleshooting.md) — common problems and their causes
 - [Third-party apps](third-party-apps.md) — how apps interact with the theme
 - [Updating the theme](updating.md) — upgrading safely without losing your work
