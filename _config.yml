@@ -1,0 +1,23 @@
+title: Kestrin — Theme Documentation
+description: Documentation and support for Kestrin, a premium Online Store 2.0 Shopify theme by MezTech.
+theme: jekyll-theme-primer
+
+plugins:
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+
+# Rewrites in-page links like [Installation](installation.md) to the built page URL,
+# so the markdown stays readable in the repo and works on the published site.
+relative_links:
+  enabled: true
+  collections: false
+
+# Lets the .md files be published without YAML front matter.
+optional_front_matter:
+  enabled: true
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .gitignore
