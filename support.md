@@ -1,6 +1,6 @@
 # Contact support
 
-Support for the **Kestrin** theme by MezTech. Use the form below to open a ticket — you will
+Support for the **Kestrin** theme by MezTech. Use the form below to open a request — you will
 receive an automatic confirmation by email straight away, and a reply within **two business
 days**.
 
@@ -8,48 +8,21 @@ days**.
 
 ## Support request form
 
-<!--
-  ┌────────────────────────────────────────────────────────────────────────────┐
-  │  ZOHO DESK WEB FORM — PASTE YOUR EMBED CODE BETWEEN THE MARKERS BELOW       │
-  ├────────────────────────────────────────────────────────────────────────────┤
-  │  In Zoho Desk:  Setup → Channels → Web Form → (your department)             │
-  │                                                                            │
-  │  1. Build the form with EXACTLY these fields, in this order:                │
-  │       • Name              — single line, required                           │
-  │       • Email             — email, required                                 │
-  │       • Store URL         — single line, required,                          │
-  │                             placeholder: https://your-store.myshopify.com   │
-  │       • Subject           — single line, required                           │
-  │       • Description       — multi line, required                            │
-  │       • Attachment        — file upload, optional, allow multiple           │
-  │                                                                            │
-  │     Do NOT add budget, phone number, or project-type fields. Shopify's      │
-  │     theme store requirements explicitly call these out as unnecessary.      │
-  │                                                                            │
-  │  2. Enable the auto-responder:                                              │
-  │       Setup → Automation → Notify Customer → "Acknowledgement to            │
-  │       customer on ticket creation". Draft copy is in the setup notes.       │
-  │                                                                            │
-  │  3. Copy the generated embed <iframe> / <script> and paste it below,        │
-  │     replacing the placeholder block.                                        │
-  │                                                                            │
-  │  4. Update the "form does not load" fallback link to your real Zoho         │
-  │     hosted form URL.                                                        │
-  └────────────────────────────────────────────────────────────────────────────┘
--->
-
-<!-- BEGIN ZOHO DESK WEB FORM EMBED -->
-
-<div style="border:1px dashed #d0d7de;border-radius:6px;padding:24px;text-align:center;color:#57606a;background:#f6f8fa;">
-  <strong>Support form embed goes here.</strong><br>
-  Replace this block with the Zoho Desk web form embed code.
-</div>
-
-<!-- END ZOHO DESK WEB FORM EMBED -->
+<iframe
+  id="JotFormIFrame-262268776841066"
+  title="Kestrin Theme Support Request"
+  allowtransparency="true"
+  allow="fullscreen"
+  src="https://form.jotform.com/262268776841066"
+  frameborder="0"
+  style="min-width:100%;max-width:100%;height:539px;border:none;"
+  scrolling="no"
+></iframe>
+<script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
+<script>window.jotformEmbedHandler("iframe[id='JotFormIFrame-262268776841066']", "https://form.jotform.com/")</script>
 
 **If the form does not load**, please open the
-[hosted support form](https://desk.zoho.com/portal/REPLACE-WITH-YOUR-PORTAL/newticket)
-directly.
+[support request form](https://form.jotform.com/262268776841066) directly.
 
 ---
 
@@ -138,8 +111,8 @@ is built on top of it is yours.
 
 ## Response expectations
 
-Submitting the form opens a ticket and sends you an automatic confirmation immediately. A reply
-follows within **two business days**.
+Submitting the form sends you an automatic confirmation immediately. A reply follows within
+**two business days**.
 
 Providing complete information in your first message — particularly a preview link and steps to
 reproduce — makes a resolution substantially faster than an exchange of clarifying questions.
