@@ -81,28 +81,28 @@ The more of this you supply, the faster you get a useful answer.
 
 ## What support covers
 
-- ✅ Questions about how to use the theme's features
-- ✅ Help finding and understanding theme settings
-- ✅ Bugs in the theme as supplied
-- ✅ Problems following this documentation
-- ✅ Clarification of anything documented here
-- ✅ Guidance on updating the theme
+- Questions about how to use the theme's features
+- Help finding and understanding theme settings
+- Bugs in the theme as supplied
+- Problems following this documentation
+- Clarification of anything documented here
+- Guidance on updating the theme
 
 ## What support does not cover
 
-- ❌ **Custom code** — writing it, debugging it, or fixing a theme it has broken
-- ❌ **Theme customization requests** — new features or design changes beyond the settings
+- **Custom code** — writing it, debugging it, or fixing a theme it has broken
+- **Theme customization requests** — new features or design changes beyond the settings
   provided
-- ❌ **Third-party apps** — their behavior, configuration or conflicts. Contact the app developer,
+- **Third-party apps** — their behavior, configuration or conflicts. Contact the app developer,
   who can see and change their own code.
-- ❌ **Shopify platform issues** — billing, checkout, payments, shipping, domains, tax. Contact
+- **Shopify platform issues** — billing, checkout, payments, shipping, domains, tax. Contact
   [Shopify Support](https://help.shopify.com/).
-- ❌ **General Shopify training** — how to add products, set up payments or configure shipping.
+- **General Shopify training** — how to add products, set up payments or configure shipping.
   Shopify's own documentation covers these thoroughly.
-- ❌ **Content work** — writing copy, editing images, entering products, building your catalogue
-- ❌ **SEO or marketing consulting** — see [SEO](seo.md) for what the theme provides
-- ❌ **Migrating content** from another theme or platform
-- ❌ **Server, domain or email configuration**
+- **Content work** — writing copy, editing images, entering products, building your catalogue
+- **SEO or marketing consulting** — see [SEO](seo.md) for what the theme provides
+- **Migrating content** from another theme or platform
+- **Server, domain or email configuration**
 
 This scope is standard for a theme product. The line is: the theme as supplied is supported; what
 is built on top of it is yours.
