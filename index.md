@@ -1,13 +1,12 @@
 # Kestrin — Theme Documentation
 
-**Version 1.1.0** · Built by MezTech
+**Version 1.2.0** · Built by MezTech
 
 Kestrin is a premium Online Store 2.0 theme for Shopify, built for fashion, electronics,
 beauty, home, lifestyle and general retail merchants.
 
 > **Need help?** Open a ticket on the **[support form](support.md)**. You will get an automatic
 > confirmation immediately and a reply within two business days.
-
 > **A note on the name.** The theme is named **Kestrin** in Shopify admin. **MezTech** is the
 > theme author. If you have seen this project referred to as "MezTech" internally, Kestrin is
 > the name your store will show.
@@ -61,7 +60,7 @@ guides is carried out through Shopify admin or the Theme Editor.
 - [SEO](seo.md) — what the theme provides and what you are responsible for
 - [Accessibility](accessibility.md) — what is built in and what you control
 - [Performance](performance.md) — keeping your store fast
-- [Translations and languages](translations.md) — multi-language and multi-market stores
+- [Translations and localization](translations.md) — languages, currency, markets and right-to-left
 
 ### Maintenance
 
@@ -75,14 +74,17 @@ guides is carried out through Shopify admin or the Theme Editor.
 
 ### For developers
 
-- [Developer guide](developer-guide.md) — architecture, conventions and local workflow
+- [Theme architecture](architecture.md) — how the theme is put together, and why
+- [Developer guide](developer-guide.md) — conventions, tokens, data flow and local workflow
+- [Feature inventory](feature-inventory.md) — every capability with its verified status
+- [Production readiness](production-readiness.md) — limitations, dependencies and the pre-publish checklist
 
 ---
 
 ## Key capabilities at a glance
 
 - **Online Store 2.0** — JSON templates, sections everywhere, app blocks on every major template
-- **23 sections you can add to any page**, including slideshow, image banner, before/after
+- **21 sections you can add to any content page**, including slideshow, image banner, before/after
   comparison, countdown, marquee, testimonials, logo list, video, collapsible content and a
   contact form — alongside the dedicated product, collection, cart, search, blog and page sections
 - **Native color schemes** — recolor any section from the Theme Editor without touching code
@@ -91,7 +93,12 @@ guides is carried out through Shopify admin or the Theme Editor.
   drawer recommendations
 - **Predictive search** across products, collections, blog posts and pages
 - **Storefront filtering and sorting** on collection and search pages
-- **Five storefront languages** shipped: English, French, German, Spanish, Italian
+- **Eight storefront languages** shipped: English, Arabic, French, German, Italian, Polish,
+  Romanian, Spanish
+- **Right-to-left support** — an RTL language mirrors the layout, flips directional icons and
+  reverses arrow-key direction, with an Arabic font fallback applied only where it is needed
+- **Country and language selectors** backed by Shopify's own localization form, working without
+  JavaScript
 - **Customer accounts** through Shopify's hosted account component
 - **No build step and no framework** — nothing to compile before uploading
 
@@ -101,9 +108,9 @@ guides is carried out through Shopify admin or the Theme Editor.
 
 | | |
 | --- | --- |
-| Documentation | <https://mezbah15.github.io/kestrin-docs/> |
-| Support | [Support request form](support.md) |
-| Shopify Theme Editor help | <https://help.shopify.com/en/manual/online-store/themes> |
-| Shopify Navigation help | <https://help.shopify.com/en/manual/online-store/menus-and-links> |
+| Documentation | https://mezbah15.github.io/kestrin-docs/ |
+| Support | [Support request form](https://mezbah15.github.io/kestrin-docs/support.html) |
+| Shopify Theme Editor help | https://help.shopify.com/en/manual/online-store/themes |
+| Shopify Navigation help | https://help.shopify.com/en/manual/online-store/menus-and-links |
 
 See [Support](support.md) for what support covers before getting in touch.

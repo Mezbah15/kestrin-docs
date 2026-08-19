@@ -32,10 +32,15 @@ Every page declares its canonical URL, so search engines know which version of a
 one. This matters on filtered and sorted collection pages, which produce many URLs for the same
 content.
 
+**Search result pages carry `noindex,follow`.** They are thin, query-generated duplicates of
+content already indexed under its own URL, so they are kept out of the index while the links on
+them stay crawlable. Nothing else in the theme sets a robots directive.
+
 ### Pagination hints
 
-Paginated pages declare `prev` and `next` links, so search engines understand they are a sequence
-rather than duplicates.
+Paginated listings mark their previous and next controls with `rel="prev"` and `rel="next"`, and
+article pages do the same for the previous and next post, so crawlers can follow a sequence rather
+than treating each page as an isolated duplicate.
 
 ### Heading structure
 

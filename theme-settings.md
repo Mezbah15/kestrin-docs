@@ -33,7 +33,7 @@ lets you alternate light and dark bands down a page without any code.
 
 ### Editing a scheme
 
-Click a scheme to edit these eight values:
+Click a scheme to edit these ten values:
 
 | Color | Used for |
 | --- | --- |
@@ -42,14 +42,23 @@ Click a scheme to edit these eight values:
 | **Text** | Body text, headings, icons, and the color borders are derived from. |
 | **Button background** | The fill of primary buttons. |
 | **Button label** | The text on primary buttons. |
+| **Accelerated button background** | The fill of Shopify's accelerated checkout buttons (Shop Pay, PayPal and similar). |
+| **Accelerated button label** | The text on accelerated checkout buttons. |
 | **Secondary button label** | The text and border of secondary (outlined) buttons. |
 | **Accent** | Links, and highlights throughout the section. |
 | **Shadow** | The color shadows are tinted with. |
 
-**Recommended:** keep at least three schemes — a light one for most content, a tinted one for
-alternating bands, and a dark one for banners and overlays. The theme's defaults are set up this
-way (`scheme-1` light, `scheme-2` tinted, `scheme-3` dark), and the shipped sections reference
-them, so keeping that pattern means fewer surprises.
+**The theme ships four schemes**, and the shipped sections reference them:
+
+| Scheme | Role |
+| --- | --- |
+| `scheme-1` | Light — white background, used for most content |
+| `scheme-2` | Tinted — warm off-white, for alternating bands and the footer |
+| `scheme-3` | Dark — near-black, for banners, overlays and the transparent header |
+| `scheme-4` | Accent — the accent color as a background, for a single high-contrast band |
+
+You can edit all four, and add more. Keeping the light/tinted/dark/accent pattern means fewer
+surprises, because the shipped section defaults are written against it.
 
 **Important:** make sure text has real contrast against its background in every scheme. This is
 the single most common accessibility failure on a Shopify store. See

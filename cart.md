@@ -142,8 +142,12 @@ separators — `100`, not `$100.00`.
 > **Settings → Shipping and delivery**. If the two disagree, shoppers will be told they qualified
 > and then charged for delivery — which is the fastest way to lose an order at checkout.
 >
-> Also check the threshold in every market you sell to. A single number cannot be right in three
-> currencies at once.
+>
+> **In other currencies the bar simply does not appear.** The threshold is one number in your
+> store's own currency, and Shopify offers no per-market equivalent, so comparing it against a cart
+> priced in another currency would promise free shipping the checkout will not honour. The bar is
+> shown only while the shopper is buying in your store's primary currency; every other market falls
+> back to the shipping rates Shopify actually applies at checkout. Nothing to configure.
 
 The bar updates automatically as the cart changes, and only appears when the cart has items.
 
@@ -230,8 +234,8 @@ Test a real add-to-cart and a real checkout on a phone before publishing. See
 **Items disappear from the cart.** Shopify clears cart lines whose product became unavailable,
 was unpublished, or ran out of stock. Check the product's status and inventory in admin.
 
-**The free shipping bar shows the wrong amount.** The threshold is entered as a plain number in
-your store currency. Check for a currency symbol, a comma or a decimal point in the field, and
+**The free shipping bar shows the wrong amount, or does not appear.** The threshold is entered as a
+plain number in your store currency, and the bar is hidden outside that currency by design. Check for a currency symbol, a comma or a decimal point in the field, and
 confirm the number matches your actual shipping rate.
 
 **The drawer does not open.** Confirm **Cart type** is set to Drawer. If it is, a script error —

@@ -75,6 +75,13 @@ need to turn animations off for accessibility.
 
 Slideshow autoplay always provides a pause button.
 
+### Text direction
+
+If you publish a right-to-left language, the whole layout mirrors — alignment, ordering, drawer
+direction, and the meaning of the left and right arrow keys. Directional icons flip so a "next"
+arrow still points the way the reader is going, and letter-spaced uppercase labels drop their
+tracking, which damages Arabic word shaping. See [Translations](translations.md).
+
 ### Images
 
 Alt text you set in Shopify admin is output on every image. Decorative images — such as the

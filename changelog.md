@@ -7,6 +7,50 @@ The version currently installed in your store is shown in the Theme Editor under
 
 ---
 
+## [1.2.0]
+
+Right-to-left storefronts, three more languages, and a round of correctness and performance
+fixes.
+
+### Added
+
+- **Right-to-left storefronts are fully supported.** Publishing an RTL language mirrors the whole
+  layout, flips directional arrows and chevrons, reverses what the left and right arrow keys do in
+  menus and slideshows, and drops letter-spacing from uppercase labels where it damages Arabic
+  word shaping.
+- **Arabic, Polish and Romanian storefront translations**, bringing the theme to eight languages.
+- **An Arabic font fallback.** On a right-to-left storefront the theme inserts a Naskh-first chain
+  after your chosen font and before the generic fallbacks, so Arabic renders in a proper face
+  while Latin text keeps the font you picked. Left-to-right storefronts are unaffected.
+- **A fallback favicon**, so a store with no favicon uploaded still gets a real tab icon.
+
+### Changed
+
+- **Counted messages now pick the right grammatical form in the browser.** Search and filter
+  counts that update without a page reload carry every form the language declares — six for
+  Arabic, four for Polish, three for Romanian — instead of freezing the grammar at whatever the
+  count happened to be on first paint.
+- **The free shipping bar now appears only in your store's primary currency.** The threshold is a
+  single number in a single currency, and Shopify offers no per-market equivalent, so comparing it
+  against a cart priced elsewhere could promise free shipping the checkout would not honour. Other
+  markets fall back to the shipping rates Shopify actually applies. Nothing to configure.
+- **The home page now ships populated** with an instance of every content section, so a new store
+  has something to edit rather than an empty canvas.
+- **The accent color was darkened** so it clears 4.5:1 contrast on both light color schemes.
+
+### Fixed
+
+- The cart page no longer executes `cart.js` twice.
+- The search stylesheet no longer blocks the first paint.
+- Per-card variant work is deferred until the card is near the viewport.
+- Merchant-entered text is escaped on the way into image `alt` attributes.
+- Closed overlays are taken out of the tab order, and the collection page heading order was
+  corrected.
+- Banner styles were split out of the marketing stylesheet, so pages that only need one no longer
+  download both.
+
+---
+
 ## [1.1.0]
 
 ### Added

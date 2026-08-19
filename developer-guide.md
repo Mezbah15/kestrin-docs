@@ -10,7 +10,7 @@ everything a merchant needs is in the guides listed in the [README](README.md).
 | | |
 | --- | --- |
 | Theme name | Kestrin |
-| Version | 1.1.0 |
+| Version | 1.2.0 |
 | Author | MezTech |
 | Architecture | Shopify Online Store 2.0 |
 | Build step | None |
@@ -77,7 +77,7 @@ so a single setting rescales the whole type ramp.
 Shopify deduplicates repeated stylesheet tags, so a shared stylesheet requested by three sections
 is downloaded once.
 
-**Nothing uses {% raw %}`{% stylesheet %}` or `{% javascript %}`{% endraw %}.** Those tags bundle every section's code
+**Nothing uses {% raw %}`{% stylesheet %}`{% endraw %} or {% raw %}`{% javascript %}`{% endraw %}.** Those tags bundle every section's code
 into a single file served on every page, which defeats page-scoping.
 
 | File | Loaded by |
@@ -93,7 +93,12 @@ into a single file served on every page, which defeats page-scoping.
 | `section-blog.css` | Blog, article |
 | `section-marketing.css` | Marketing sections |
 | `section-slideshow.css` | Slideshow |
-| `section-customer.css` | Account component styling |
+| `section-customer.css` | Contact form, gift card, account component styling |
+| `component-banner.css` | Banner primitives shared by slideshow, image banner, newsletter, video |
+
+`section-header.css` is the exception: it is emitted from `layout/theme.liquid`, not from the
+header section, because the announcement bar and the localization form need it too and three
+identical tags cost three parses.
 
 **Breakpoints.** Three, min-width only:
 
@@ -133,18 +138,35 @@ Editor replaces section markup — no `shopify:section:load` listeners needed.
 | `announce(message)` | Live-region announcement |
 | `sectionUrl(url, sections)` | Builds a Section Rendering API URL |
 | `isDesignMode()` | True inside the Theme Editor |
+| `assets` | Asset URLs fetched on demand — currently `quickAdd` |
+| `loadAsset(name, selector, root)` | Appends a script tag once per page, and only if `selector` matches inside `root` |
+| `loadQuickAdd(root)` | `loadAsset` for `quick-add.js`; called by anything that renders cards after load |
+| `isRTL()` | Reads `documentElement.dir` per call, so the Theme Editor can swap language without a reload |
+| `pluralForm(n)` | CLDR plural category for `n` in the active locale, via `Intl.PluralRules` |
+| `measureScrollbar()` | Caches the scrollbar width into `--scrollbar-width` outside of a lock |
 | `variantPicker` | Option reading shared by the product page and card pickers — `read`, `containers`, `nodes`, `selected`, `match`, `valueAvailable`, `markAvailability` |
 
 ### Custom elements
 
-```
-accordion-group      background-video     cart-items          facet-filters
-announcement-bar     before-after         collapsible-on-mobile  header-nav
-back-to-top          cart-drawer          countdown-timer     localization-selector
-mobile-nav           overlay-element      pickup-availability predictive-search
-quantity-input       quick-add-button     share-button        site-header
-slideshow-carousel   deferred-media       card-variant-picker
-```
+Thirty elements, defined across the script files below. Definitions are guarded with
+`customElements.get` first, because several sections may request the same script file.
+
+| Defined in | Elements |
+| --- | --- |
+| `global.js` | `accordion-group`, `overlay-element`, `quantity-input`, `deferred-media`, `back-to-top`, `share-button` |
+| `header.js` | `site-header`, `header-nav`, `mobile-nav`, `announcement-bar`, `localization-selector`, `collapsible-on-mobile` |
+| `cart.js` | `cart-items`, `cart-drawer` |
+| `product.js` | `product-media`, `variant-selects`, `product-form`, `product-recommendations` |
+| `quick-add.js` | `card-variant-picker`, `quick-add-button` |
+| `slideshow.js` | `slideshow-carousel`, `background-video` |
+| `customer.js` | `form-status`, `copy-text`, `print-button` |
+| `facets.js` | `facet-filters` |
+| `predictive-search.js` | `predictive-search` |
+| `countdown.js` | `countdown-timer` |
+| `before-after.js` | `before-after` |
+| `pickup-availability.js` | `pickup-availability` |
+
+`<shopify-account>` is Shopify's, not the theme's.
 
 ### Script files
 
@@ -160,8 +182,16 @@ slideshow-carousel   deferred-media       card-variant-picker
 | `slideshow.js` | Slideshow carousel |
 | `before-after.js`, `countdown.js`, `pickup-availability.js`, `customer.js` | Single-purpose |
 
-`header.js` is requested by several sections, so its definitions are guarded against a duplicated
-script tag.
+`global.js` and `header.js` are emitted once from `layout/theme.liquid` and load on every page.
+Everything else is requested by the section or snippet that needs it, so its definitions are
+guarded against a duplicated script tag.
+
+`quick-add.js` is the one script with no tag of its own. Cards arrive after load in several
+places — recommendations, a re-rendered drawer, a filtered grid — and markup injected that way
+fires no `shopify:section:load`, so Liquid cannot dedupe a per-section tag. Its URL travels in
+`#KestrinConfig` instead, and whoever renders cards calls `Kestrin.loadQuickAdd(root)`. The call
+is cheap to repeat: it short-circuits once the file is loading, and does nothing at all if the
+subtree contains no card picker or quick-add button.
 
 ---
 
@@ -189,7 +219,7 @@ refreshes the cart page, the drawer and the header bubble together.
 ## Liquid conventions
 
 - **Snippets carry a {% raw %}`{% comment %}`{% endraw %} header** documenting their accepted parameters.
-- **Blocks rendered statically** via {% raw %}`{% content_for 'block' %}` carry a `{% doc %}`{% endraw %} tag.
+- **Blocks rendered statically** via {% raw %}`{% content_for 'block' %}`{% endraw %} carry a {% raw %}`{% doc %}`{% endraw %} tag.
 - **Translation keys are spelled out literally**, not built with `append`, so Theme Check's
   `TranslationKeyExists` can verify them.
 - **Escape user and merchant content** with `| escape` on text output.
@@ -209,6 +239,38 @@ Product schema comes from Shopify's native `| structured_data` filter, to keep t
 duplicates.
 
 **The breadcrumb trail mirrors `snippets/breadcrumbs.liquid` — change both together.**
+
+---
+
+## Localization and direction
+
+The theme renders selectors for what Shopify publishes. It does not own Markets, currency,
+conversion or the language list, and nothing in it should start doing so.
+
+**Direction.** `layout/theme.liquid` sets `dir` from `request.locale.text_direction`. Layout
+mirroring is the browser's job, which is why CSS is written with logical properties throughout.
+`[dir='rtl']` rules exist only where mirroring is not enough:
+
+- `base.css` flips directional icon glyphs (`.icon--arrow-*`, `.icon--chevron-*`) and the native
+  select caret.
+- Several stylesheets zero out `letter-spacing` on uppercase eyebrows, badges and vendor lines.
+  Tracking is a Latin device and it breaks Arabic word shaping.
+
+In JavaScript, `Kestrin.isRTL()` covers the two things CSS cannot mirror: which way a horizontal
+arrow key should step (`header.js`, `slideshow.js`) and the sign of a scroll offset
+(`product.js`). It reads the attribute per call rather than caching, because the Theme Editor can
+swap the previewed language without a reload.
+
+**Arabic typography.** `--font-arabic-fallback` is defined on `:root` but applied only inside the
+`[dir='rtl']` block, which re-declares `--font-body-family` and `--font-heading-family` with the
+Arabic chain inserted **after** the merchant's face and **before** the generic fallbacks. Order
+matters: font matching walks the list per character and stops at the first face carrying the
+glyph, so anything placed after the generic is unreachable. An LTR document keeps the merchant's
+chain untouched.
+
+**Currency.** Never format money in JavaScript and never compare an amount across a currency
+boundary. `snippets/cart-free-shipping.liquid` is the worked example: the threshold is one number
+in `shop.currency`, so the bar renders only while `cart.currency.iso_code == shop.currency`.
 
 ---
 
@@ -265,14 +327,16 @@ as swatches whatever it is named. Anything else falls back to a compact select.
 
 ## Configuration
 
-`config/settings_schema.json` defines eleven groups: theme info, logo, colors, typography,
-layout, appearance, product cards, badges, cart, search, social media, and SEO and sharing.
+`config/settings_schema.json` holds `theme_info` plus eleven setting groups: logo, colors,
+typography, layout, appearance, product cards, badges, cart, search, social media, and SEO and
+sharing.
 
 Color uses `color_scheme_group` with roles mapped so Shopify's own controls behave correctly.
 Conditional settings use `visible_if`.
 
-`config/settings_data.json` holds the shipped defaults, including the three color schemes the
-sections reference (`scheme-1` light, `scheme-2` tinted, `scheme-3` dark).
+`config/settings_data.json` ships a named preset, **Kestrin**, which is also the current value, so
+merchants can restore the original design from the Theme Editor. It defines four color schemes the
+sections reference: `scheme-1` light, `scheme-2` tinted, `scheme-3` dark, `scheme-4` accent.
 
 ---
 
@@ -280,18 +344,28 @@ sections reference (`scheme-1` light, `scheme-2` tinted, `scheme-3` dark).
 
 | File | Contents |
 | --- | --- |
-| `en.default.json` | Storefront strings |
+| `en.default.json` | Storefront strings (272 keys) |
 | `en.default.schema.json` | Theme Editor labels and help text |
-| `fr.json`, `de.json`, `es.json`, `it.json` | Storefront strings |
+| `ar.json`, `de.json`, `es.json`, `fr.json`, `it.json`, `pl.json`, `ro.json` | Storefront strings |
 
-**Editor strings are English only.** Storefront strings exist in all five languages.
+**Editor strings are English only.** Storefront strings exist in all eight languages.
 
-**Release invariant: exact key parity across all five storefront locale files, and zero broken
-translation references.** Adding a storefront string means adding it to all five files.
+**Release invariant: exact key parity across all eight storefront locale files, and zero broken
+translation references.** Adding a storefront string means adding it to all eight files.
+
+Plural keys are the one permitted exception to strict parity: a locale carries exactly the CLDR
+categories it declares, so `ar.json` holds six forms where `en.default.json` holds two. Extra
+plural leaves are expected; a missing non-plural key is not.
 
 Client-side strings are passed through `#KestrinConfig` in `layout/theme.liquid`. Placeholders
 that must survive into JSON — like {% raw %}`{{ count }}`{% endraw %} — are built with `assign` before the output tag,
 because a brace-wrapped token cannot be written inline in a Liquid output tag.
+
+Pluralised strings travel as an object keyed by CLDR category rather than as one resolved string,
+because Liquid would otherwise freeze the grammar at whatever the count was at first paint. Each
+form is probed by addressing the leaf directly; a form the locale does not declare comes back as a
+missing-translation marker and is dropped. `Kestrin.t` then selects a form per update using
+`Kestrin.pluralForm`.
 
 ---
 
@@ -348,7 +422,7 @@ deployed to the store.
 
 - [ ] `shopify theme check` — zero offenses
 - [ ] `node bin/check-liquid-tags.js` — no wrapped statements
-- [ ] Exact key parity across all five storefront locale files
+- [ ] Exact key parity across all eight storefront locale files (plural leaves excepted)
 - [ ] Zero broken translation references
 - [ ] `theme_version` bumped in `config/settings_schema.json`
 - [ ] [Changelog](changelog.md) updated
@@ -383,6 +457,12 @@ tables, no evergreen countdowns. If Liquid cannot verify it at render time, do n
 
 **Respect reduced motion** in anything animated.
 
-**Add translations to all five storefront locales** for any new storefront string.
+**Add translations to all eight storefront locales** for any new storefront string, with every
+plural form each locale declares.
+
+**Write direction-neutral CSS.** Use logical properties (`padding-inline`, `inset-inline-start`,
+`text-align: start`) so RTL needs no second rule. Reserve `[dir='rtl']` for the handful of things
+mirroring cannot fix on its own — icon flips and letter-spacing on uppercase labels. In JavaScript,
+use `Kestrin.isRTL()` for anything with a horizontal sign: arrow-key direction and scroll offsets.
 
 **Run Theme Check before committing.**

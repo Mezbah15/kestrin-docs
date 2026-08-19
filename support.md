@@ -153,7 +153,7 @@ Bugs confirmed against an unmodified theme are the ones that can be fixed in a r
 | | |
 | --- | --- |
 | **Theme name** | Kestrin |
-| **Version** | 1.0.0 |
+| **Version** | 1.2.0 |
 | **Author** | MezTech |
 | **Documentation** | <https://mezbah15.github.io/kestrin-docs/> |
 | **Support** | The form at the top of this page |
